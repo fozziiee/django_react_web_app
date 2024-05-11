@@ -7,7 +7,7 @@ import "../styles/Form.css";
 function Form({ route, method }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { loading, setLoading } = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const name = method === "login" ? "Login" : "Register";
@@ -21,6 +21,7 @@ function Form({ route, method }) {
       if (method === "login") {
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+        navigate("/");
       } else {
         navigate("/login");
       }
@@ -42,7 +43,7 @@ function Form({ route, method }) {
         placeholder="Username"
       />
       <input
-        type="text"
+        type="password"
         className="form-input"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
